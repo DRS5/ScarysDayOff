@@ -17,9 +17,10 @@ public class Scary extends Character implements KeyboardHandler {
         private Picture picture;
         private Position pos;
         private PlayableArea playableArea;
-        private int distance = 50;
+        private int distance = 40;
         private int PADDING = 10;
         private boolean isHittingWall;
+        private Direction direction;
 
     public Scary(){
             picture = new Picture(30,500, "scary/idle right scary.png");
@@ -56,6 +57,42 @@ public class Scary extends Character implements KeyboardHandler {
 
         keyboard.addEventListener((upPressed));
 
+        KeyboardEvent spacePressed = new KeyboardEvent();
+        spacePressed.setKey(KeyboardEvent.KEY_SPACE);
+        spacePressed.setKeyboardEventType((KeyboardEventType.KEY_PRESSED));
+
+        keyboard.addEventListener((spacePressed));
+
+        KeyboardEvent spaceReleased = new KeyboardEvent();
+        spaceReleased.setKey(KeyboardEvent.KEY_SPACE);
+        spaceReleased.setKeyboardEventType((KeyboardEventType.KEY_RELEASED));
+
+        keyboard.addEventListener((spaceReleased));
+
+        KeyboardEvent rightReleased = new KeyboardEvent();
+        rightReleased.setKey(KeyboardEvent.KEY_RIGHT);
+        rightReleased.setKeyboardEventType((KeyboardEventType.KEY_RELEASED));
+
+        keyboard.addEventListener(rightReleased);
+
+        KeyboardEvent leftReleased = new KeyboardEvent();
+        leftReleased.setKey(KeyboardEvent.KEY_LEFT);
+        leftReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener((leftReleased));
+
+        KeyboardEvent upReleased = new KeyboardEvent();
+        upReleased.setKey(KeyboardEvent.KEY_UP);
+        upReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener((upReleased));
+
+        KeyboardEvent downReleased = new KeyboardEvent();
+        downReleased.setKey(KeyboardEvent.KEY_DOWN);
+        downReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener((downReleased));
+
     }
 
 
@@ -65,17 +102,25 @@ public class Scary extends Character implements KeyboardHandler {
 
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-            if (pos.getX() >= 1180) {
+            if (pos.getX() >= 1130) {
                 return;
             }
+            direction = Direction.RIGHT;
+            picture.delete();
+            picture = new Picture(pos.getX(), pos.getY(), "scary/walk right scary.png");
+            picture.draw();
             picture.translate(distance, 0);// foto vai andar 50 pixeis para a direita
             pos.increaseX(distance);
 
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
-            if (pos.getX() <= 30) {
+            if (pos.getX() <= 100) {
                 return;
             }
+            direction = Direction.LEFT;
+            picture.delete();
+            picture = new Picture(pos.getX(), pos.getY(), "scary/walk left scary.png");
+            picture.draw();
             picture.translate(-distance, 0);// foto vai andar 50 pixeis para a esquerda
             pos.decreaseX(distance);
 
@@ -84,25 +129,105 @@ public class Scary extends Character implements KeyboardHandler {
             if (pos.getY() >= 575) {
                 return;
             }
+            if(direction == Direction.RIGHT){
+                picture.delete();
+                picture = new Picture(pos.getX(), pos.getY(), "scary/walk right scary.png");
+                picture.draw();
+            }
+            if (direction == Direction.LEFT){
+                picture.delete();
+                picture = new Picture(pos.getX(), pos.getY(), "scary/walk left scary.png");
+                picture.draw();
+            }
             picture.translate(0, distance);
             pos.increaseY(distance);
 
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
-            if (pos.getY() <= 400) {
+            if (pos.getY() <= 450) {
                 return;
+            }
+            if(direction == Direction.RIGHT){
+                picture.delete();
+                picture = new Picture(pos.getX(), pos.getY(), "scary/walk right scary.png");
+                picture.draw();
+            }
+            if(direction == Direction.LEFT){
+                picture.delete();
+                picture = new Picture(pos.getX(), pos.getY(), "scary/walk left scary.png");
+                picture.draw();
             }
             picture.translate(0, -distance);
             pos.decreaseY(distance);
 
-        }//if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE){
-                //por as picture de ataque aqui e if se a direction for esquerda ou direita
-    //}
+        }
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+            if (direction == Direction.RIGHT) {
+                picture.delete();
+                picture = new Picture(pos.getX(), pos.getY(), "scary/punch right scary.png");
+                picture.draw();
+            } else {
+                picture.delete();
+                picture = new Picture(pos.getX() - 31, pos.getY(), "scary/punch left scary.png");
+                picture.draw();
+            }
+        }
     }
 
-    @Override
-    public void keyReleased(KeyboardEvent keyboardEvent) {
+        @Override
+        public void keyReleased (KeyboardEvent keyboardEvent){
+
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+                if (direction == Direction.RIGHT) {
+                    picture.delete();
+                    picture = new Picture(pos.getX(), pos.getY(), "scary/idle right scary.png");
+                    picture.draw();
+                } else {
+                    picture.delete();
+                    picture = new Picture(pos.getX(), pos.getY(), "scary/idle left scary.png");
+                    picture.draw();
+                }
+            }
+
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
+                picture.delete();
+                picture = new Picture(pos.getX(), pos.getY(), "scary/idle right scary.png");
+                picture.draw();
+            }
+
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
+                picture.delete();
+                picture = new Picture(pos.getX(), pos.getY(), "scary/idle left scary.png");
+                picture.draw();
+            }
+
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
+                if (direction == Direction.RIGHT){
+                    picture.delete();
+                    picture = new Picture(pos.getX(), pos.getY(), "scary/idle right scary.png");
+                    picture.draw();
+                }
+                if (direction == Direction.LEFT) {
+                    picture.delete();
+                    picture = new Picture(pos.getX(), pos.getY(), "scary/idle left scary.png");
+                    picture.draw();
+                }
+            }
+
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
+                if (direction == Direction.LEFT){
+                    picture.delete();
+                    picture = new Picture(pos.getX(), pos.getY(), "scary/idle left scary.png");
+                    picture.draw();
+                }
+                if (direction == Direction.RIGHT) {
+                    picture.delete();
+                    picture = new Picture(pos.getX(), pos.getY(), "scary/idle right scary.png");
+                    picture.draw();
+                }
+            }
+
 
     }
-
 }
+
