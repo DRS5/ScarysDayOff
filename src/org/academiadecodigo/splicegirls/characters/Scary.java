@@ -29,6 +29,10 @@ public class Scary extends Character implements KeyboardHandler {
             keyboardInit();
     }
 
+    public Position getPos(){
+        return pos;
+    }
+
 
     private void keyboardInit(){
         Keyboard keyboard = new Keyboard(this);

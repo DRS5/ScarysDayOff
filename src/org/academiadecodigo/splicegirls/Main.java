@@ -1,16 +1,15 @@
 package org.academiadecodigo.splicegirls;
 
+import org.academiadecodigo.splicegirls.characters.Enemy;
 import org.academiadecodigo.splicegirls.level.Stage;
 import org.academiadecodigo.splicegirls.characters.Scary;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        Stage stage = new Stage();
-        Scary scary = new Scary();
-
-
+        Game game = new Game();
+        game.start();
 
 
     }
