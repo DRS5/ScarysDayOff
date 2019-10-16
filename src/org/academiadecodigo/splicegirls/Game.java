@@ -10,7 +10,13 @@ public class Game {
 
         Stage stage = new Stage();
         Scary scary = new Scary();
-        Enemy enemy = new Enemy();
-    }
+        Enemy enemy = new Enemy(scary);
 
+        scary.setEnemy(enemy);
+
+        while (enemy.getIsAlive()){
+            enemy.move();
+            Thread.sleep(500);
+        }
+    }
 }

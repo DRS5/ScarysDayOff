@@ -26,9 +26,7 @@ public class Position {
         this.x = x + distance;
     }
 
-    public void decreaseX(int distance){
-        this.x = x - distance;
-    }
+    public void decreaseX(int distance){ this.x = x - distance; }
 
     public void increaseY(int distance){
         this.y = y + distance;

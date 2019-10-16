@@ -11,26 +11,41 @@ import org.academiadecodigo.splicegirls.level.PlayableArea;
 import org.academiadecodigo.splicegirls.position.Position;
 
 import java.awt.*;
+import java.util.concurrent.ExecutionException;
 
-public class Scary extends Character implements KeyboardHandler {
+public class Scary implements KeyboardHandler {
 
         private Picture picture;
         private Position pos;
-        private PlayableArea playableArea;
         private int distance = 40;
-        private int PADDING = 10;
-        private boolean isHittingWall;
         private Direction direction;
+        private int health = 100;
+        private Enemy enemy;
 
-    public Scary(){
+    public Scary() {
             picture = new Picture(30,500, "scary/idle right scary.png");
             picture.draw();
             pos = new Position(30, 500);
+            health = 100;
+
             keyboardInit();
     }
 
     public Position getPos(){
         return pos;
+    }
+
+    public void setEnemy(Enemy enemy){
+        this.enemy = enemy;
+    }
+
+    public void attack(){
+
+            if(enemy.getHealth() > 0) {
+                    enemy.hit(25);
+            } else {
+                enemy.killEnemy();
+            }
     }
 
 
@@ -104,7 +119,6 @@ public class Scary extends Character implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
             if (pos.getX() >= 1130) {
                 return;
@@ -170,15 +184,21 @@ public class Scary extends Character implements KeyboardHandler {
                 picture.delete();
                 picture = new Picture(pos.getX(), pos.getY(), "scary/punch right scary.png");
                 picture.draw();
+                attack();
             } else {
                 picture.delete();
                 picture = new Picture(pos.getX() - 31, pos.getY(), "scary/punch left scary.png");
                 picture.draw();
+                attack();
             }
+
         }
     }
 
-        @Override
+
+
+
+    @Override
         public void keyReleased (KeyboardEvent keyboardEvent){
 
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
@@ -230,8 +250,18 @@ public class Scary extends Character implements KeyboardHandler {
                     picture.draw();
                 }
             }
-
-
     }
+
+
+    public void setHealth(int damage){
+        this.health = health - damage;
+    }
+
+
+
+
+
+
+
 }
 
