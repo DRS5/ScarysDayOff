@@ -1,5 +1,4 @@
 package org.academiadecodigo.splicegirls.level;
-
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Background {
@@ -11,9 +10,6 @@ public class Background {
         port.draw();
     }
 
-    public void setBackground(){
-        port = new Picture(10, 10, "background/fundobarcos.jpg");
-        port.draw();
-    }
+
 
 }

@@ -9,51 +9,68 @@ public class Enemy {
 
     private Picture picture;
     private Position pos;
-    private int health;
-    private int distance = 40;
+    private int health = 50;
+    private int distance = 1;
+    private int cellSize = 80;
+    private final int PADDING = 10;
+    private int startingPointCol = 80;
     private boolean isAlive = true;
+    private int startingPointRow = 400;
+    private int col;
+    private int row;
     private Scary scary;
 
-    public Enemy(Scary scary) throws InterruptedException {
+    public Enemy(int col, int row, Scary scary) throws InterruptedException {
 
-        picture = new Picture(1000,500, "enemy/enemy1 idle.png");
+        picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "enemy/enemy1 idle.png");
         picture.draw();
-        pos = new Position(1000, 500);
-        health = 50;
         this.scary = scary;
-
+        this.col = col;
+        this.row = row;
+        pos = new Position(col, row);
 
     }
 
     public void move(){
 
-            int x = (scary.getPos().getX()) - (pos.getX() - distance *2);// isto vai dar pixeis X que Enemie tem de andar
-            int y = (scary.getPos().getY()) - (pos.getY());// isto vai dar pixeis Y que Enemie tem de andar
+            if(col > scary.getPos().getCol()){
+                if((col - 1) == scary.getPos().getCol())  {
+                    return;
+                }
+                col--;
+                picture.translate(-cellSize, 0);
 
-            if (x < 0){
-                pos.moveLeft();
-                picture.translate(-distance, 0);
             }
-            if (x > 0){
-                pos.moveRight();
-                picture.translate(+distance, 0);
+            if(col < scary.getPos().getCol()){
+                if((col + 1) == scary.getPos().getCol())  {
+                    return;
+                }
+               col++;
+               picture.translate(cellSize, 0);
+
             }
 
-            if (y < 0 ){
-                pos.moveUp();
-                picture.translate(0, -distance);
+            if(row > scary.getPos().getRow()){
+                 if((row - 1) == scary.getPos().getRow())  {
+                     return;
+                 }
+                row--;
+                picture.translate(0, -cellSize);
             }
 
-            if (y > 0 ){
-                pos.moveDown();
-                picture.translate(0, +distance);
+            if (row < scary.getPos().getRow()){
+                if((row + 1) == scary.getPos().getRow())  {
+                     return;
+                }
+                row++;
+                picture.translate(0, cellSize);
             }
 
         }
 
      public void attack() {
 
-        if((scary.getPos().getX() - pos.getX()) <= distance || (scary.getPos().getY() - pos.getY()) <= distance){
+        if((scary.getPos().getCol() - pos.getCol()) <= distance || (scary.getPos().getRow() - pos.getRow()) <= distance){
             scary.setHealth(10);
             //TODO put enemy attack animation here
         }
