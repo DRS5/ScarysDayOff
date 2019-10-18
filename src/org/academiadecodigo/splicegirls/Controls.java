@@ -6,6 +6,8 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.splicegirls.characters.Direction;
+import org.academiadecodigo.splicegirls.characters.Enemy;
+import org.academiadecodigo.splicegirls.characters.EnemyFactory;
 import org.academiadecodigo.splicegirls.characters.Scary;
 import org.academiadecodigo.splicegirls.level.Grid;
 
@@ -13,11 +15,16 @@ public class Controls implements KeyboardHandler {
 
     private Scary scary;
     private Grid grid;
+    private Enemy enemy;
 
     public Controls(Scary scary, Grid grid){
         this.scary = scary;
         this.grid = grid;
         keyboardInit();
+    }
+
+    public void setEnemy(Enemy enemy) {
+        this.enemy = enemy;
     }
 
     private void keyboardInit(){
@@ -154,17 +161,16 @@ public class Controls implements KeyboardHandler {
                 scary.getPicture().delete();
                 scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/punch right scary.png"));
                 scary.getPicture().draw();
-                scary.attack();
+                scary.attack(enemy);
             } else {
                 scary.getPicture().delete();
                 scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/punch left scary.png"));
                 scary.getPicture().draw();
-                scary.attack();
+                scary.attack(enemy);
             }
 
         }
     }
-
 
 
     @Override
@@ -220,5 +226,4 @@ public class Controls implements KeyboardHandler {
             }
         }
     }
-
 }

@@ -16,88 +16,105 @@ public class Enemy {
     private int startingPointCol = 80;
     private boolean isAlive = true;
     private int startingPointRow = 400;
+    private int enemyDelay = 200;
     private int col;
     private int row;
-    private Scary scary;
+    private Enemy enemy;
 
-    public Enemy(int col, int row, Scary scary) throws InterruptedException {
+    public Enemy(int col, int row) throws InterruptedException {
 
-        picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "enemy/enemy1 idle.png");
+        picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "enemy/enemy1 idle.png");
         picture.draw();
-        this.scary = scary;
         this.col = col;
         this.row = row;
         pos = new Position(col, row);
 
     }
 
-    public void move(){
+    public void move(Scary scary) {
 
-            if(col > scary.getPos().getCol()){
-                if((col - 1) == scary.getPos().getCol())  {
-                    return;
+        if (col > scary.getPos().getCol()) {
+            if ((col - 1) == scary.getPos().getCol()) {
+                if (row < scary.getPos().getRow()) {
+                    row++;
+                } else {
+                    row--;
                 }
-                col--;
-                picture.translate(-cellSize, 0);
-
+                return;
             }
-            if(col < scary.getPos().getCol()){
-                if((col + 1) == scary.getPos().getCol())  {
-                    return;
+            col--;
+            picture.translate(-cellSize, 0);
+
+        }
+        if (col < scary.getPos().getCol()) {
+            if ((col + 1) == scary.getPos().getCol()) {
+                if (row < scary.getPos().getRow()) {
+                    row++;
+                } else {
+                    row--;
                 }
-               col++;
-               picture.translate(cellSize, 0);
-
+                return;
             }
-
-            if(row > scary.getPos().getRow()){
-                 if((row - 1) == scary.getPos().getRow())  {
-                     return;
-                 }
-                row--;
-                picture.translate(0, -cellSize);
-            }
-
-            if (row < scary.getPos().getRow()){
-                if((row + 1) == scary.getPos().getRow())  {
-                     return;
-                }
-                row++;
-                picture.translate(0, cellSize);
-            }
+            col++;
+            picture.translate(cellSize, 0);
 
         }
 
-     public void attack() {
-
-        if((scary.getPos().getCol() - pos.getCol()) <= distance || (scary.getPos().getRow() - pos.getRow()) <= distance){
-            scary.setHealth(10);
-            //TODO put enemy attack animation here
+        if (row -1 > scary.getPos().getRow()) { //coloquei -1 aqui!!!
+            row--;
+            picture.translate(0, -cellSize);
         }
-         //TODO put enemy attack animation here, in case he misses animation is still there
 
-     }
+        if (row -1 < scary.getPos().getRow()) { //coloquei -1 aqui!!!
+            row++;
+            picture.translate(0, cellSize);
+        }
 
-    public void hit(int damage){
-        this.health = health - damage;
     }
 
-    public int getHealth(){
+    public void enemyAnimation() throws InterruptedException {
+        picture.delete();
+        picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "enemy/enemy1 walk.png");
+        picture.draw();
+
+    }
+
+
+    public void attack(Scary scary) throws InterruptedException {
+        if (scary.getHealth() > 0) {
+            if (scary.getPos().getCol() + 1 == col && scary.getPos().getRow() == row
+                    || scary.getPos().getCol() - 1 == col && scary.getPos().getRow() == row) {
+                Thread.sleep(600 * 2); // para demorar mais tempo a atacar
+                scary.hit(25);
+            }
+        } else {
+            scary.killScary();
+        }
+    }
+
+    public void hit(int damage) {
+        this.health = health - damage;
+        System.out.println("Enemy health: " + health);
+    }
+
+    public int getHealth() {
         return health;
     }
 
-    public Position getPos(){
+    public Position getPos() {
         return pos;
     }
 
-    public boolean getIsAlive(){
+    public boolean getIsAlive() {
         return isAlive;
     }
 
-    public void killEnemy(){
+    public void killEnemy() {
         isAlive = false;
         this.picture.delete();
     }
 
-
+    public Picture getPicture(){
+        return picture;
     }
+}

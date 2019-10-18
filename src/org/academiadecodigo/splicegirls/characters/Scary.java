@@ -16,11 +16,11 @@ public class Scary {
         private int health = 100;
         private int col;
         private int row;
+        private boolean isAlive = true;
         private int cellSize = 80;
         private final int PADDING = 10;
         private int startingPointCol = 80;
         private int startingPointRow = 400;
-        private Enemy enemy;
 
     public Scary(int col, int row) {
 
@@ -32,19 +32,23 @@ public class Scary {
         pos = new Position(col, row);
     }
 
-    public void attack(){
+    public void attack(Enemy enemy){
 
         if(enemy.getHealth() > 0) {
-            if ((enemy.getPos().getCol() - (pos.getCol()) <= distance || (enemy.getPos().getRow() - pos.getRow()) <= distance) ){
                 enemy.hit(25);
-            }
         } else {
             enemy.killEnemy();
         }
     }
 
-    public void setHealth(int damage){
+    public void hit(int damage){
         this.health = health - damage;
+        System.out.println("Scary health: " + health);
+    }
+
+    public void killScary(){
+        isAlive = false;
+        this.picture.delete();
     }
 
     public int getCol(){
@@ -75,14 +79,6 @@ public class Scary {
         this.picture = picture;
     }
 
-    public int getDistance(){
-        return distance;
-    }
-
-    public void setEnemy(Enemy enemy){
-        this.enemy = enemy;
-    }
-
     public int getCellSize(){
         return cellSize;
     }
@@ -94,5 +90,10 @@ public class Scary {
     public int getStartingPointRow(){
         return startingPointRow;
     }
+
+    public int getHealth(){
+        return health;
+    }
+
 }
 

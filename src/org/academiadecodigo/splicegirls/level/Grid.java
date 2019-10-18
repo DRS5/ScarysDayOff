@@ -4,6 +4,7 @@ public class Grid {
 
     private int cols;
     private int rows;
+    private int cellSize = 80;
     private Cell[][] grid;
 
     public Grid(int cols, int rows){
@@ -25,5 +26,9 @@ public class Grid {
 
     public int getRows(){
         return rows;
+    }
+
+    public int getCellSize(){
+        return cellSize;
     }
 }
