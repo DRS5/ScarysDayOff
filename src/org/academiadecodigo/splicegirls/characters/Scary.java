@@ -10,7 +10,6 @@ import org.academiadecodigo.splicegirls.position.Position;
 public class Scary {
 
         private Picture picture;
-        private Position pos;
         private Direction direction;
         private int distance = 1;
         private int health = 100;
@@ -21,7 +20,7 @@ public class Scary {
         private final int PADDING = 10;
         private int startingPointCol = 80;
         private int startingPointRow = 400;
-        private int damage = 25;
+        private int damage = 50;
 
     public Scary(int col, int row) {
 
@@ -30,20 +29,42 @@ public class Scary {
 
         picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "scary/idle right scary.png");
         picture.draw();
-        pos = new Position(col, row);
+    }
+
+    public void moveUp() {
+        row = row - distance;
+
+    }
+
+    public void moveDown() {
+        row = row + distance;
+
+    }
+
+    public void moveLeft() {
+        col = col - distance;
+
+    }
+
+    public void moveRight() {
+        col = col + distance;
+
     }
 
     public void attack(Enemy enemy){
 
-            if(col + 1 == enemy.getPos().getCol() && row == enemy.getPos().getRow()
-                    || col - 1 == enemy.getPos().getCol() && row == enemy.getPos().getRow()){
-                if (enemy.getHealth() > 0) {
-                    enemy.hit(damage);
-                    if (enemy.getHealth() <= 0){
-                        enemy.killEnemy();
-                    }
-                }
+        if(enemy.getHealth() > 0) {
+            if (enemy.getCol() == col +1 && enemy.getRow() == row){
+                enemy.hit(50);
+                System.out.println("outch");
             }
+            if (enemy.getCol() == col -1 && enemy.getRow() == row){
+                enemy.hit(50);
+                System.out.println("outch2");
+            }
+        } else {
+            enemy.killEnemy();
+        }
 
     }
     public void hit(int damage){
@@ -62,10 +83,6 @@ public class Scary {
 
     public int getRow(){
         return row;
-    }
-
-    public Position getPos(){
-        return pos;
     }
 
     public Direction getDirection(){

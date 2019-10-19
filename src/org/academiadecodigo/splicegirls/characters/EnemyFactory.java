@@ -5,6 +5,6 @@ public class EnemyFactory {
 
     public static Enemy createEnemy() throws InterruptedException {
 
-        return new Enemy(14, 1);
+        return new Enemy(14, 2);
     }
 }

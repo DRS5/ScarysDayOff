@@ -1,5 +1,8 @@
 package org.academiadecodigo.splicegirls.level;
 
+
+import java.awt.*;
+
 public class Grid {
 
     private int cols;
@@ -10,6 +13,7 @@ public class Grid {
     public Grid(int cols, int rows){
         this.cols = cols;
         this.rows = rows;
+
 
         grid = new Cell[cols][rows];
 

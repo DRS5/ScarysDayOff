@@ -97,74 +97,80 @@ public class Controls implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-            if (scary.getPos().getCol() >= grid.getCols()) {
+            if (scary.getCol() >= grid.getCols()) {
                 return;
             }
             scary.setDirection(Direction.RIGHT);
             scary.getPicture().delete();
-            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/walk right scary.png"));
+            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk right scary.png"));
             scary.getPicture().draw();
             scary.getPicture().translate(+scary.getCellSize(), 0);// foto vai andar 50 pixeis para a direita
-            scary.getPos().moveRight();
+            scary.moveRight();
+
+
 
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
-            if (scary.getPos().getCol() <= 0) {
+            if (scary.getCol() <= 0) {
                 return;
             }
             scary.setDirection(Direction.LEFT);
             scary.getPicture().delete();
-            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/walk left scary.png"));
+            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk left scary.png"));
             scary.getPicture().draw();
             scary.getPicture().translate(-scary.getCellSize(), 0);// foto vai andar 50 pixeis para a esquerda
-            scary.getPos().moveLeft();
+            scary.moveLeft();
+
+
 
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
-            if (scary.getPos().getRow() >= grid.getRows()) {
+            if (scary.getRow() >= grid.getRows()) {
                 return;
             }
             if(scary.getDirection() == Direction.RIGHT){
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/walk right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk right scary.png"));
                 scary.getPicture().draw();
             }
             if (scary.getDirection() == Direction.LEFT){
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/walk left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk left scary.png"));
                 scary.getPicture().draw();
             }
             scary.getPicture().translate(0, +scary.getCellSize());
-            scary.getPos().moveDown();
+            scary.moveDown();
+
 
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
-            if (scary.getPos().getRow() <= 0) {
+            if (scary.getRow() <= 0) {
                 return;
             }
             if(scary.getDirection() == Direction.RIGHT){
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/walk right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk right scary.png"));
                 scary.getPicture().draw();
             }
             if(scary.getDirection() == Direction.LEFT){
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/walk left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk left scary.png"));
                 scary.getPicture().draw();
             }
             scary.getPicture().translate(0, -scary.getCellSize());
-            scary.getPos().moveUp();
+            scary.moveUp();
+
 
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             if (scary.getDirection() == Direction.RIGHT) {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/punch right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/punch right scary.png"));
                 scary.getPicture().draw();
                 scary.attack(enemy);
             } else {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/punch left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/punch left scary.png"));
                 scary.getPicture().draw();
                 scary.attack(enemy);
             }
@@ -179,36 +185,36 @@ public class Controls implements KeyboardHandler {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             if (scary.getDirection() == Direction.RIGHT) {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
                 scary.getPicture().draw();
             } else {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
                 scary.getPicture().draw();
             }
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
             scary.getPicture().delete();
-            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle right scary.png"));
+            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
             scary.getPicture().draw();
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
             scary.getPicture().delete();
-            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle left scary.png"));
+            scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
             scary.getPicture().draw();
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
             if (scary.getDirection() == Direction.RIGHT){
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
                 scary.getPicture().draw();
             }
             if (scary.getDirection() == Direction.LEFT) {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
                 scary.getPicture().draw();
             }
         }
@@ -216,12 +222,12 @@ public class Controls implements KeyboardHandler {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
             if (scary.getDirection() == Direction.LEFT){
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
                 scary.getPicture().draw();
             }
             if (scary.getDirection() == Direction.RIGHT) {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getPos().getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getPos().getRow() * 80 + 10), "scary/idle right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
                 scary.getPicture().draw();
             }
         }

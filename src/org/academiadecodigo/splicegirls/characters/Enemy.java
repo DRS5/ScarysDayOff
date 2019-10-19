@@ -9,16 +9,16 @@ import org.academiadecodigo.splicegirls.position.Position;
 public class Enemy {
 
     private Picture picture;
-    private Position pos;
     private int health = 100;
     private int distance = 1;
     private int cellSize = 80;
     private final int PADDING = 10;
     private int startingPointCol = 80;
-    private boolean isAlive = true;
     private int startingPointRow = 400;
+    private boolean isAlive = true;
     private int col;
     private int row;
+    private int damage = 10;
     private Grid grid;
 
     public Enemy(int col, int row) throws InterruptedException {
@@ -27,7 +27,6 @@ public class Enemy {
         picture.draw();
         this.col = col;
         this.row = row;
-        pos = new Position(col, row);
 
     }
 
@@ -35,8 +34,8 @@ public class Enemy {
 
         //left
 
-        if (col > scary.getPos().getCol()) {
-            if (col == 1){
+        if (col > scary.getCol()) {
+            if (col == 0){
                 return;
             }
             col--;
@@ -46,34 +45,38 @@ public class Enemy {
 
         //right
 
-        if (col < scary.getPos().getCol()) {
-            if (col == grid.getCols()+1){
+        if (col < scary.getCol()) {
+            if (col == grid.getCols()){
                 return;
             }
             col++;
             picture.translate(cellSize, 0);
+
             }
 
         //up
 
 
-        if (row > scary.getPos().getRow()) {
-            if (row == 1){
+        if (row > scary.getRow()) {
+            if (row == 0){
                 return;
             }
             row--;
             picture.translate(0, -cellSize);
+
         }
 
         //down
 
 
-        if (row < scary.getPos().getRow()) {
-            if(row == grid.getRows() +1){
+        if (row < scary.getRow()) {
+            if(row == grid.getRows()){
                 return;
             }
             row++;
             picture.translate(0, cellSize);
+
+
         }
 
     }
@@ -87,15 +90,20 @@ public class Enemy {
 
 
     public void attack(Scary scary) throws InterruptedException {
-        if (scary.getHealth() > 0) {
-            if (scary.getPos().getCol() + 1 == col && scary.getPos().getRow() == row
-                    || scary.getPos().getCol() - 1 == col && scary.getPos().getRow() == row) {
-                Thread.sleep(600 * 4); // para demorar mais tempo a atacar
-                scary.hit(10);
+
+        if(scary.getHealth() > 0) {
+            if (scary.getCol() +1 == col && scary.getRow() == row){
+                scary.hit(damage);
+                System.out.println("scary outch");
+            }
+            if (scary.getCol() -1 == col && scary.getRow() == row){
+                scary.hit(damage);
+                System.out.println("scary outch2");
             }
         } else {
             scary.killScary();
         }
+
     }
 
     public void hit(int damage) {
@@ -105,10 +113,6 @@ public class Enemy {
 
     public int getHealth() {
         return health;
-    }
-
-    public Position getPos() {
-        return pos;
     }
 
     public boolean getIsAlive() {
@@ -126,5 +130,13 @@ public class Enemy {
 
     public Grid setGrid(Grid grid){
         return this.grid = grid;
+    }
+
+    public int getCol(){
+        return col;
+    }
+
+    public int getRow(){
+        return row;
     }
 }

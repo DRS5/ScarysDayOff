@@ -16,7 +16,6 @@ public class Game {
     private Grid grid;
     private Scary scary;
     private Controls controls;
-    private Enemy enemy;
     private Enemy[] enemies;
     private int numberOfEnemies = 3;
 
@@ -34,20 +33,15 @@ public class Game {
     public void spawnEnemies() throws InterruptedException {
 
         enemies = new Enemy[numberOfEnemies];
-        Enemy enemyX;
-        int rowCounter = 1;
+        Enemy enemy;
 
         for (int i = 0; i < numberOfEnemies; i++){
-            if (rowCounter == 3){
-                rowCounter = 1;
-            }
-            enemyX = EnemyFactory.createEnemy();
-            controls.setEnemy(enemyX);
-            enemyX.setGrid(grid);
-            enemyX.getPicture().translate( 0, (rowCounter - 2) * grid.getCellSize());
-            animateEnemies(enemyX);
-            enemies[i] = enemyX;
-            rowCounter++;
+
+            enemy = EnemyFactory.createEnemy();
+            controls.setEnemy(enemy);
+            enemy.setGrid(grid);
+            animateEnemies(enemy);
+            enemies[i] = enemy;
 
         }
     }
@@ -85,14 +79,5 @@ public class Game {
             }
 
         }
-
-
-        //while (enemy.getIsAlive()){
-        //    if(scary.getPos().getCol() == enemy.getPos().getCol() + 1
-        //            || scary.getPos().getCol() == enemy.getPos().getCol() - 1 ) {
-        //        enemy.attack();
-        //        Thread.sleep(delay*2); // para demorar mais tempo a atacar
-        //    }
-        //}
 
 }
