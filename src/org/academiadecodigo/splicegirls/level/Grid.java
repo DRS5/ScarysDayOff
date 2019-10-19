@@ -31,4 +31,5 @@ public class Grid {
     public int getCellSize(){
         return cellSize;
     }
+
 }

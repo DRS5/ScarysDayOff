@@ -3,23 +3,23 @@ package org.academiadecodigo.splicegirls.characters;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.splicegirls.level.Grid;
 import org.academiadecodigo.splicegirls.position.Position;
 
 public class Enemy {
 
     private Picture picture;
     private Position pos;
-    private int health = 50;
+    private int health = 100;
     private int distance = 1;
     private int cellSize = 80;
     private final int PADDING = 10;
     private int startingPointCol = 80;
     private boolean isAlive = true;
     private int startingPointRow = 400;
-    private int enemyDelay = 200;
     private int col;
     private int row;
-    private Enemy enemy;
+    private Grid grid;
 
     public Enemy(int col, int row) throws InterruptedException {
 
@@ -33,39 +33,45 @@ public class Enemy {
 
     public void move(Scary scary) {
 
+        //left
+
         if (col > scary.getPos().getCol()) {
-            if ((col - 1) == scary.getPos().getCol()) {
-                if (row < scary.getPos().getRow()) {
-                    row++;
-                } else {
-                    row--;
-                }
+            if (col == 1){
                 return;
             }
             col--;
             picture.translate(-cellSize, 0);
 
         }
+
+        //right
+
         if (col < scary.getPos().getCol()) {
-            if ((col + 1) == scary.getPos().getCol()) {
-                if (row < scary.getPos().getRow()) {
-                    row++;
-                } else {
-                    row--;
-                }
+            if (col == grid.getCols()+1){
                 return;
             }
             col++;
             picture.translate(cellSize, 0);
+            }
 
-        }
+        //up
 
-        if (row -1 > scary.getPos().getRow()) { //coloquei -1 aqui!!!
+
+        if (row > scary.getPos().getRow()) {
+            if (row == 1){
+                return;
+            }
             row--;
             picture.translate(0, -cellSize);
         }
 
-        if (row -1 < scary.getPos().getRow()) { //coloquei -1 aqui!!!
+        //down
+
+
+        if (row < scary.getPos().getRow()) {
+            if(row == grid.getRows() +1){
+                return;
+            }
             row++;
             picture.translate(0, cellSize);
         }
@@ -84,8 +90,8 @@ public class Enemy {
         if (scary.getHealth() > 0) {
             if (scary.getPos().getCol() + 1 == col && scary.getPos().getRow() == row
                     || scary.getPos().getCol() - 1 == col && scary.getPos().getRow() == row) {
-                Thread.sleep(600 * 2); // para demorar mais tempo a atacar
-                scary.hit(25);
+                Thread.sleep(600 * 4); // para demorar mais tempo a atacar
+                scary.hit(10);
             }
         } else {
             scary.killScary();
@@ -116,5 +122,9 @@ public class Enemy {
 
     public Picture getPicture(){
         return picture;
+    }
+
+    public Grid setGrid(Grid grid){
+        return this.grid = grid;
     }
 }

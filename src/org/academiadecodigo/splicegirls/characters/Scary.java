@@ -21,6 +21,7 @@ public class Scary {
         private final int PADDING = 10;
         private int startingPointCol = 80;
         private int startingPointRow = 400;
+        private int damage = 25;
 
     public Scary(int col, int row) {
 
@@ -34,13 +35,17 @@ public class Scary {
 
     public void attack(Enemy enemy){
 
-        if(enemy.getHealth() > 0) {
-                enemy.hit(25);
-        } else {
-            enemy.killEnemy();
-        }
-    }
+            if(col + 1 == enemy.getPos().getCol() && row == enemy.getPos().getRow()
+                    || col - 1 == enemy.getPos().getCol() && row == enemy.getPos().getRow()){
+                if (enemy.getHealth() > 0) {
+                    enemy.hit(damage);
+                    if (enemy.getHealth() <= 0){
+                        enemy.killEnemy();
+                    }
+                }
+            }
 
+    }
     public void hit(int damage){
         this.health = health - damage;
         System.out.println("Scary health: " + health);
@@ -94,6 +99,8 @@ public class Scary {
     public int getHealth(){
         return health;
     }
+
+
 
 }
 

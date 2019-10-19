@@ -38,14 +38,17 @@ public class Game {
         int rowCounter = 1;
 
         for (int i = 0; i < numberOfEnemies; i++){
-            if (rowCounter == 4){
+            if (rowCounter == 3){
                 rowCounter = 1;
             }
             enemyX = EnemyFactory.createEnemy();
+            controls.setEnemy(enemyX);
+            enemyX.setGrid(grid);
             enemyX.getPicture().translate( 0, (rowCounter - 2) * grid.getCellSize());
             animateEnemies(enemyX);
             enemies[i] = enemyX;
             rowCounter++;
+
         }
     }
 
@@ -53,6 +56,20 @@ public class Game {
     public void start() throws InterruptedException {
 
         spawnEnemies();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
         public void animateEnemies(Enemy enemy){
