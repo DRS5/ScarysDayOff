@@ -1,29 +1,26 @@
 package org.academiadecodigo.splicegirls.characters;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.splicegirls.level.Grid;
-import org.academiadecodigo.splicegirls.position.Position;
 
 public class Enemy {
 
     private Picture picture;
+    private int startingPointCol = 80;
+    private int startingPointRow = 400;
+    private final int PADDING = 10;
     private int health = 100;
     private int distance = 1;
     private int cellSize = 80;
-    private final int PADDING = 10;
-    private int startingPointCol = 80;
-    private int startingPointRow = 400;
     private boolean isAlive = true;
     private int col;
     private int row;
     private int damage = 5;
     private Grid grid;
 
-    public Enemy(int col, int row) throws InterruptedException {
+    public Enemy(int col, int row, String picturePath) {
 
-        picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "enemy/enemy1 idle.png");
+        picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), picturePath);
         picture.draw();
         this.col = col;
         this.row = row;
@@ -52,7 +49,7 @@ public class Enemy {
             col++;
             picture.translate(cellSize, 0);
 
-            }
+        }
 
         //up
 
@@ -75,19 +72,8 @@ public class Enemy {
             }
             row++;
             picture.translate(0, cellSize);
-
-
         }
-
     }
-
-    public void enemyAnimation() throws InterruptedException {
-        picture.delete();
-        picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "enemy/enemy1 walk.png");
-        picture.draw();
-
-    }
-
 
     public void attack(Scary scary) throws InterruptedException {
 
@@ -103,7 +89,6 @@ public class Enemy {
         } else {
             scary.killScary();
         }
-
     }
 
     public void hit(int damage) {
@@ -124,10 +109,6 @@ public class Enemy {
         this.picture.delete();
     }
 
-    public Picture getPicture(){
-        return picture;
-    }
-
     public Grid setGrid(Grid grid){
         return this.grid = grid;
     }
@@ -140,3 +121,4 @@ public class Enemy {
         return row;
     }
 }
+

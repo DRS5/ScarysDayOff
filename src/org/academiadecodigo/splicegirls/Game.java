@@ -16,7 +16,7 @@ public class Game {
     private Scary scary;
     private Controls controls;
     private Enemy[] enemies;
-    private int numberOfEnemies = 3;
+    private int numberOfEnemies = 5;
 
     public Game() {
         stage = new Stage();

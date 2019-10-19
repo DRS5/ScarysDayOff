@@ -8,11 +8,11 @@ public class EnemyFactory {
         int randomNumber = Random.getRandom(10);
 
         if (randomNumber <= 5){
-            return new Enemy(14, 2);
+            return new Paparazzi(14, 2, "enemy/enemy2 idle.png");
         }
 
         else {
-            return new Enemy (- 1, 2);
+            return new Fan(- 1, 2, "enemy/enemy1 idle.png");
         }
     }
 }
