@@ -18,7 +18,7 @@ public class Enemy {
     private boolean isAlive = true;
     private int col;
     private int row;
-    private int damage = 10;
+    private int damage = 5;
     private Grid grid;
 
     public Enemy(int col, int row) throws InterruptedException {

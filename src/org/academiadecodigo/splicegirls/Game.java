@@ -5,7 +5,6 @@ import org.academiadecodigo.splicegirls.characters.Scary;
 import org.academiadecodigo.splicegirls.level.Grid;
 import org.academiadecodigo.splicegirls.level.Stage;
 
-import java.util.LinkedList;
 
 public class Game {
 
@@ -19,19 +18,17 @@ public class Game {
     private Enemy[] enemies;
     private int numberOfEnemies = 3;
 
-    public Game(
-    ) throws InterruptedException {
+    public Game() {
         stage = new Stage();
         grid = new Grid(13,2);
-        scary = new Scary(1,1);
-        //enemy = new Enemy(14,2);
+        scary = new Scary( 6,1);
         controls = new Controls(scary, grid);
-
-
     }
 
     public void spawnEnemies() throws InterruptedException {
 
+
+        Thread.sleep(delay * 4);
         enemies = new Enemy[numberOfEnemies];
         Enemy enemy;
 

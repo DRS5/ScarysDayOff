@@ -20,7 +20,7 @@ public class Scary {
         private final int PADDING = 10;
         private int startingPointCol = 80;
         private int startingPointRow = 400;
-        private int damage = 50;
+        private int damage = 25;
 
     public Scary(int col, int row) {
 
