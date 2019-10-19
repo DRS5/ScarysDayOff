@@ -1,5 +1,7 @@
 package org.academiadecodigo.splicegirls.characters;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -21,6 +23,7 @@ public class Scary {
         private int startingPointCol = 80;
         private int startingPointRow = 400;
         private int damage = 25;
+        private Rectangle healthbar;
 
     public Scary(int col, int row) {
 
@@ -29,6 +32,8 @@ public class Scary {
 
         picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "scary/idle right scary.png");
         picture.draw();
+
+        healthBar();
     }
 
     public void moveUp() {
@@ -69,6 +74,7 @@ public class Scary {
     }
     public void hit(int damage){
         this.health = health - damage;
+        updateHealthBar();
         System.out.println("Scary health: " + health);
     }
 
@@ -76,6 +82,28 @@ public class Scary {
         isAlive = false;
         this.picture.delete();
     }
+
+    public void healthBar(){
+        healthbar = new Rectangle (60, 60, health*5, 30);
+        healthbar.setColor(Color.GREEN);
+        healthbar.fill();
+    }
+
+    public void updateHealthBar(){
+        if (health < 30){
+            healthbar.delete();
+            healthbar = new Rectangle (60, 60, health*5, 30);
+            healthbar.setColor(Color.RED);
+            healthbar.fill();
+        } else {
+            healthbar.delete();
+            healthbar = new Rectangle(60, 60, health * 5, 30);
+            healthbar.setColor(Color.GREEN);
+            healthbar.fill();
+        }
+    }
+
+
 
     public int getCol(){
         return col;
@@ -116,8 +144,5 @@ public class Scary {
     public int getHealth(){
         return health;
     }
-
-
-
 }
 

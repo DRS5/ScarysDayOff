@@ -6,12 +6,5 @@ public class Random {
         return (int) Math.floor(Math.random() * value);
     }
 
-    public static int getRandomCol(int value){
-        return (int) Math.floor(Math.random() * value);
-    }
-
-    public static int getRandomRow(int value){
-        return (int) Math.floor(Math.random() * value);
-    }
-
 }
+

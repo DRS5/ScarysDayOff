@@ -6,7 +6,7 @@ public class Background {
     private Picture port;
 
     public Background(){
-        port = new Picture(10, 10, "background/fundobarcos.jpg");
+        port = new Picture(10, 10, "levelBackground/fundobarcos.jpg");
         port.draw();
     }
 

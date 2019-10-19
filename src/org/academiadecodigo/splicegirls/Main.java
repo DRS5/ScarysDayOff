@@ -1,23 +1,15 @@
 package org.academiadecodigo.splicegirls;
 
-import org.academiadecodigo.splicegirls.characters.Enemy;
-import org.academiadecodigo.splicegirls.level.Stage;
-import org.academiadecodigo.splicegirls.characters.Scary;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         Game game = new Game();
-        System.out.println(Random.getRandomRow(3));
-        System.out.println(Random.getRandomRow(3));
-        System.out.println(Random.getRandomRow(3));
-        System.out.println(Random.getRandomRow(3));
-        System.out.println(Random.getRandomRow(3));
-        System.out.println(Random.getRandomRow(3));
-        System.out.println(Random.getRandomRow(3));
         game.start();
-
 
     }
 

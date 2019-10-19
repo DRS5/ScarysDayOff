@@ -11,15 +11,28 @@ import org.academiadecodigo.splicegirls.characters.EnemyFactory;
 import org.academiadecodigo.splicegirls.characters.Scary;
 import org.academiadecodigo.splicegirls.level.Grid;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Controls implements KeyboardHandler {
 
     private Scary scary;
     private Grid grid;
     private Enemy enemy;
+    Music punch;
+    private boolean menuIsOn = true;
+
+
 
     public Controls(Scary scary, Grid grid){
         this.scary = scary;
         this.grid = grid;
+
+        String filepath = "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/sounds/punch 8bit1.wav";
+        punch = new Music();
+        punch.playMusic(filepath);
+
         keyboardInit();
     }
 
@@ -27,7 +40,12 @@ public class Controls implements KeyboardHandler {
         this.enemy = enemy;
     }
 
+    public boolean getMenuIsOn(){
+        return menuIsOn;
+    }
+
     private void keyboardInit(){
+
         Keyboard keyboard = new Keyboard(this);
 
         KeyboardEvent rightPressed = new KeyboardEvent();
@@ -90,6 +108,12 @@ public class Controls implements KeyboardHandler {
 
         keyboard.addEventListener((downReleased));
 
+        KeyboardEvent sPressed = new KeyboardEvent();
+        sPressed.setKey(KeyboardEvent.KEY_S);
+        sPressed.setKeyboardEventType((KeyboardEventType.KEY_PRESSED));
+
+        keyboard.addEventListener(sPressed);
+
     }
 
 
@@ -106,10 +130,8 @@ public class Controls implements KeyboardHandler {
             scary.getPicture().draw();
             scary.getPicture().translate(+scary.getCellSize(), 0);// foto vai andar 50 pixeis para a direita
             scary.moveRight();
-
-
-
         }
+
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
             if (scary.getCol() <= 0) {
                 return;
@@ -120,10 +142,8 @@ public class Controls implements KeyboardHandler {
             scary.getPicture().draw();
             scary.getPicture().translate(-scary.getCellSize(), 0);// foto vai andar 50 pixeis para a esquerda
             scary.moveLeft();
-
-
-
         }
+
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
             if (scary.getRow() >= grid.getRows()) {
                 return;
@@ -140,9 +160,8 @@ public class Controls implements KeyboardHandler {
             }
             scary.getPicture().translate(0, +scary.getCellSize());
             scary.moveDown();
-
-
         }
+
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
             if (scary.getRow() <= 0) {
                 return;
@@ -159,9 +178,8 @@ public class Controls implements KeyboardHandler {
             }
             scary.getPicture().translate(0, -scary.getCellSize());
             scary.moveUp();
-
-
         }
+
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             if (scary.getDirection() == Direction.RIGHT) {
                 scary.getPicture().delete();
@@ -174,7 +192,12 @@ public class Controls implements KeyboardHandler {
                 scary.getPicture().draw();
                 scary.attack(enemy);
             }
+            punch.playSound("/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/sounds/punch 8bit1.wav");
+        }
 
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_S) {
+            menuIsOn = false;
+            System.out.println("lol");
         }
     }
 
