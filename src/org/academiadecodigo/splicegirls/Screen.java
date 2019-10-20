@@ -6,6 +6,7 @@ public class Screen {
 
     private Picture screen;
     private boolean isScreenOn;
+    private boolean tutorialIsOn;
 
     public Screen(){
         createIntroScreen();
@@ -19,18 +20,21 @@ public class Screen {
     }
 
     public void createGameOverScreen(){
-        Picture intro = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/screens/game over.png");
-        intro.draw();
+        Picture gameOverScreen = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/screens/game over.png");
+        gameOverScreen.draw();
     }
 
     public void createVictoryScreen(){
-        Picture intro = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/screens/congratulations.png");
-        intro.draw();
+        Picture victoryScreen = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/screens/congratulations.png");
+        victoryScreen.draw();
     }
 
-    public void createTutorialScreen(){
-        Picture intro = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/screens/tutorial com quit.png");
-        intro.draw();
+    public void createTutorialScreen() throws InterruptedException {
+        Picture tutorialScreen = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/screens/tutorial com quit.png");
+        tutorialScreen.draw();
+        Thread.sleep(8000);
+        tutorialScreen.delete();
+
     }
 
 
@@ -43,4 +47,13 @@ public class Screen {
     public boolean getIsScreenOn(){
         return isScreenOn;
     }
+
+    public void setTutorialIsOn(boolean tutorialIsOn) {
+        this.tutorialIsOn = tutorialIsOn;
+    }
+
+    public boolean isTutorialIsOn() {
+        return tutorialIsOn;
+    }
 }
+

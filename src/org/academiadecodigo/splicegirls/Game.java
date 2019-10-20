@@ -28,6 +28,7 @@ public class Game {
     private Picture picture;
 
     public Game() throws InterruptedException {
+
         screen = new Screen();
         screen.createIntroScreen();
         stage = new Stage();
@@ -40,6 +41,7 @@ public class Game {
 
     public void start() throws InterruptedException {
 
+        screen.createTutorialScreen();
         screen.createIntroScreen();
 
         while (controls.getMenuIsOn()) { //nao funciona sem sout!!!!

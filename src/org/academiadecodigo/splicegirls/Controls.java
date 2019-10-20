@@ -162,7 +162,7 @@ public class Controls implements KeyboardHandler {
                 this.menuIsOn = false;
                 screen.eraseMenu();
                 break;
-
+/*
             case KeyboardEvent.KEY_T:
                 if (tutorialIsOn){
                     screen.eraseMenu();
@@ -170,9 +170,13 @@ public class Controls implements KeyboardHandler {
                     break;
                 }
                 this.tutorialIsOn = true;
-                screen.createTutorialScreen();
+                try {
+                    screen.createTutorialScreen();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
-
+*/
             case KeyboardEvent.KEY_RIGHT:
                 if (menuIsOn) {
                     break;
