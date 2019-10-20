@@ -33,7 +33,7 @@ public class Scary {
         picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "scary/idle right scary.png");
         picture.draw();
 
-        Picture picture = new Picture(40, 44, "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/healthbar/healthbarexample.png");
+        Picture picture = new Picture(40, 44, "resources/healthbar/healthbarexample.png");
         picture.draw();
         healthBar();
 

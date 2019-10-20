@@ -8,6 +8,10 @@ public class Stage {
 
     private Picture stage;
 
+    public Stage(){
+        buildStage();
+    }
+
     public void buildStage(){
         stage = new Picture(10, 10, "levelBackground/fundobarcos.jpg");
         stage.draw();

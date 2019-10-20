@@ -22,34 +22,35 @@ public class Game {
     private Screen screen;
 
     public Game() {
+        screen = new Screen();
 
         stage = new Stage();
-        stage.buildStage();
         grid = new Grid(13, 2);
         scary = new Scary(6, 1);
-        screen = new Screen();
         controls = new Controls(scary, grid, screen);
     }
 
 
     public void start() throws InterruptedException {
 
-        while (controls.getMenuIsOn()) {
-            screen.createIntroScreen();
-        }
-        screen.eraseMenu();
+        screen.createIntroScreen();
 
-        spawnEnemies(3);
-        waveCounter++;
-        Thread.sleep(200);
-        spawnEnemies(5);
-        waveCounter++;
-        Thread.sleep(200);
-        spawnEnemies(7);
-        waveCounter++;
-        Thread.sleep(200);
-        spawnEnemies(1);
-    }
+        Thread.sleep(7000);
+
+        //while(!controls.getMenuIsOn()){
+            spawnEnemies(3);
+            waveCounter++;
+            Thread.sleep(200);
+            spawnEnemies(5);
+            waveCounter++;
+            Thread.sleep(200);
+            spawnEnemies(7);
+            waveCounter++;
+            Thread.sleep(200);
+            spawnEnemies(1);
+            return;
+        }
+
 
     public void spawnEnemies(int numberOfEnemies) throws InterruptedException {
 
@@ -57,7 +58,6 @@ public class Game {
         Thread.sleep(delay * 4);
         enemies = new Enemy[numberOfEnemies];
         Enemy enemy;
-        Enemy enemy2;
 
 
         for (int i = 0; i < numberOfEnemies; i++) {
@@ -83,6 +83,5 @@ public class Game {
                 e.printStackTrace();
             }
         }
-
     }
 }

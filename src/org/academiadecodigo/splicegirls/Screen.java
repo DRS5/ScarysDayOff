@@ -4,23 +4,31 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Screen {
 
-    Picture screen;
+    private Picture screen;
+    private boolean isScreenOn;
+
+    public Screen(){
+        createIntroScreen();
+    }
 
     public void createIntroScreen(){
-        screen = new Picture(10, 10, "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/screens/intro com tutorial.png");
+        screen = new Picture(10, 10, "resources/screens/intro com tutorial.png");
         screen.draw();
+        this.isScreenOn = true;
     }
 
     public void createGameOverScreen(){
-        Picture intro = new Picture(10, 10, "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/screens/game over.png");
+        Picture intro = new Picture(10, 10, "resources/screens/game over.png");
         intro.draw();
     }
 
 
     public void eraseMenu(){
+        isScreenOn = !isScreenOn;
         screen.delete();
-        screen = new Picture(10, 10, "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/screens/BlankScreen.png");
-        screen.draw();
     }
 
+    public boolean getIsScreenOn(){
+        return isScreenOn;
+    }
 }

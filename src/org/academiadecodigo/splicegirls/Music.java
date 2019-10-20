@@ -10,7 +10,7 @@ public class Music {
 
     public void playMusic(String musicLocation) {
         try
-            { File musicPath = new File("/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/music/Spice Girls Wannabe 8 Bit.wav");
+            { File musicPath = new File("resources/music/Spice Girls Wannabe 8 Bit.wav");
 
                 if(musicPath.exists()) {
                     AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
@@ -30,7 +30,7 @@ public class Music {
     }
     public void playSound(String musicLocation) {
         try
-            { File musicPath = new File("/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/sounds/punch 8bit1.wav");
+            { File musicPath = new File("resources/sounds/punch 8bit1.wav");
 
             if(musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
