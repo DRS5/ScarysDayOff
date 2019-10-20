@@ -75,7 +75,7 @@ public class Scary {
 
     }
 
-    public void attack(Enemy enemy) {
+    public void attack(Enemy enemy) throws InterruptedException {
 
         if (enemy.getHealth() > 0) {
             if (enemy.getCol() == col + 1 && enemy.getRow() == row) {
@@ -180,10 +180,7 @@ public class Scary {
 
     public boolean isAlive() {
         return this.isAlive;
-    }
 
-    public int getPoints() {
-        return points;
     }
 }
 

@@ -8,6 +8,8 @@ import java.io.File;
 
 public class Music {
 
+    Screen screen;
+
     public void playMusic(String musicLocation) {
         try
             { File musicPath = new File("/Users/codecadet/SpliceEmUp/resources/music/Spice Girls Wannabe 8 Bit.wav");
@@ -48,6 +50,49 @@ public class Music {
             ex.printStackTrace();
         }
     }
+
+    public void playGameOverMusic(String musicLocation) {
+        try
+        { File musicPath = new File("/Users/codecadet/SpliceEmUp/resources/music/Free Game Over Sound Effects.wav");
+
+            if(musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+
+                clip.start();
+
+            } else {
+                System.out.println("BZZT ERROR BZZT FILE NOT FOooooouund.....d...bzzt... boop");
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void playVictoryMusic(String musicLocation) {
+        try
+        { File musicPath = new File("/Users/codecadet/SpliceEmUp/resources/music/Free Game Over Sound Effects.wav");
+
+            if(musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+
+                clip.start();
+
+            } else {
+                System.out.println("BZZT ERROR BZZT FILE NOT FOooooouund.....d...bzzt... boop");
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
 
 }
 

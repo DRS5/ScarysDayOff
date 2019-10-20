@@ -20,11 +20,11 @@ public class Controls implements KeyboardHandler {
     private Scary scary;
     private Grid grid;
     private Enemy enemy;
-    private Game game;
     private Music punch;
     private boolean menuIsOn = true;
     private Screen screen;
     private boolean tutorialIsOn = false;
+    private boolean isGameOverScreenOn = false;
 
 
     public Controls(Scary scary, Grid grid, Screen screen) {
@@ -52,8 +52,8 @@ public class Controls implements KeyboardHandler {
         return menuIsOn;
     }
 
-    public boolean getTutorialIsOn() {
-        return tutorialIsOn;
+    public void isGameOverScreenOn(boolean isGameOverScreenOn){
+        this.isGameOverScreenOn = isGameOverScreenOn;
     }
 
     private void keyboardInit() {
@@ -142,15 +142,21 @@ public class Controls implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        switch (keyboardEvent.getKey()) {
+        if (keyboardEvent.getKey() == keyboardEvent.KEY_Q){
+            System.exit(0);
+        }
 
-            case KeyboardEvent.KEY_Q:
-                System.exit(0);
-                break;
+        if (isGameOverScreenOn){
+            return;
+        }
+
+        switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_S:
                 if (tutorialIsOn) {
                     this.tutorialIsOn = false;
+                    screen.eraseMenu();
+
                     break;
                 }
                 this.menuIsOn = false;
@@ -252,14 +258,22 @@ public class Controls implements KeyboardHandler {
                     scary.getPicture().delete();
                     scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/punch right scary.png"));
                     scary.getPicture().draw();
-                    scary.attack(enemy);
+                    try {
+                        scary.attack(enemy);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     punch.playSound("/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/sounds/punch 8bit1.wav");
                     break;
                 }
                 scary.getPicture().delete();
                 scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/punch left scary.png"));
                 scary.getPicture().draw();
-                scary.attack(enemy);
+                try {
+                    scary.attack(enemy);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 punch.playSound("/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/sounds/punch 8bit1.wav");
                 break;
 
@@ -271,6 +285,10 @@ public class Controls implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
+
+        if (isGameOverScreenOn){
+            return;
+        }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             if (menuIsOn) {

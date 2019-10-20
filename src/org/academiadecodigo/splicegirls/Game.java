@@ -42,19 +42,19 @@ public class Game {
 
         screen.createIntroScreen();
 
-        while(controls.getMenuIsOn()){ //nao funciona sem sout!!!!
+        while (controls.getMenuIsOn()) { //nao funciona sem sout!!!!
             System.out.println("HELLO");
         }
 
 
         //WAVE 1
 
+
         picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave1.png");
         picture.grow(-160, -100);
         picture.draw();
         Thread.sleep(2500);
         picture.delete();
-
 
         while (scary.isAlive() && waveCounter == 1) {
             spawnEnemies(3);
@@ -64,16 +64,20 @@ public class Game {
         if (!scary.isAlive()) {
             screen.createGameOverScreen();
             setGameIsOver(true);
+            controls.isGameOverScreenOn(true);
         }
-
-        picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave2.png");
-        picture.grow(-160, -100);
-        picture.draw();
-        Thread.sleep(2500);
-        picture.delete();
 
 
         //WAVE 2
+
+        if (gameIsOver == false) {
+            picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave2.png");
+            picture.grow(-160, -100);
+            picture.draw();
+            Thread.sleep(2500);
+            picture.delete();
+        }
+
 
         while (scary.isAlive() && waveCounter == 2) {
             spawnEnemies(4);
@@ -83,15 +87,17 @@ public class Game {
         if (!scary.isAlive()) {
             screen.createGameOverScreen();
             setGameIsOver(true);
+            controls.isGameOverScreenOn(true);
         }
 
         //WAVE 3
-
-        picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave3.png");
-        picture.grow(-160, -100);
-        picture.draw();
-        Thread.sleep(2500);
-        picture.delete();
+        if (gameIsOver == false) {
+            picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave3.png");
+            picture.grow(-160, -100);
+            picture.draw();
+            Thread.sleep(2500);
+            picture.delete();
+        }
 
         while (scary.isAlive() && waveCounter == 3) {
             spawnEnemies(5);
@@ -101,17 +107,18 @@ public class Game {
         if (!scary.isAlive()) {
             screen.createGameOverScreen();
             setGameIsOver(true);
+            controls.isGameOverScreenOn(true);
 
         }
 
         //WAVE 4
-
-        picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave3.png");
-        picture.grow(-160, -100);
-        picture.draw();
-        Thread.sleep(2500);
-        picture.delete();
-
+        if (gameIsOver == false) {
+            picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave4.png");
+            picture.grow(-160, -100);
+            picture.draw();
+            Thread.sleep(3000);
+            picture.delete();
+        }
         while (scary.isAlive() && waveCounter == 4) {
             spawnBoss();
             waveCounter++;
@@ -123,6 +130,7 @@ public class Game {
         if (!scary.isAlive()) {
             screen.createGameOverScreen();
             setGameIsOver(true);
+            controls.isGameOverScreenOn(true);
         }
     }
 
@@ -156,7 +164,7 @@ public class Game {
 
         enemy = EnemyFactory.createBoss();
         controls.setEnemy(enemy);
-        enemy.setHealth(200);
+        enemy.setHealth(400);
         enemy.setDamage(10);
         enemy.setGrid(grid);
         animateEnemies(enemy);
@@ -176,7 +184,7 @@ public class Game {
         }
     }
 
-    public void setGameIsOver(boolean ganeIsOver) {
+    public void setGameIsOver(boolean gameIsOver) {
         this.gameIsOver = gameIsOver;
     }
 
