@@ -33,7 +33,10 @@ public class Scary {
         picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "scary/idle right scary.png");
         picture.draw();
 
+        Picture picture = new Picture(40, 44, "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/healthbar/healthbarexample.png");
+        picture.draw();
         healthBar();
+
     }
 
     public void moveUp() {
@@ -84,6 +87,7 @@ public class Scary {
     }
 
     public void healthBar(){
+
         healthbar = new Rectangle (60, 60, health*5, 30);
         healthbar.setColor(Color.GREEN);
         healthbar.fill();

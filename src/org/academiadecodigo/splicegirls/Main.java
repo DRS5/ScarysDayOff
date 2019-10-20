@@ -11,6 +11,11 @@ public class Main {
         Game game = new Game();
         game.start();
 
+        String filepath = "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/music/Spice Girls Wannabe 8 Bit.wav";
+        Music musicObject = new Music();
+        musicObject.playMusic(filepath);
+
+
     }
 
 }

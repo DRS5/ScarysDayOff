@@ -7,10 +7,6 @@ import org.academiadecodigo.splicegirls.characters.Scary;
 import org.academiadecodigo.splicegirls.level.Grid;
 import org.academiadecodigo.splicegirls.level.Stage;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-
 
 public class Game {
 
@@ -25,22 +21,18 @@ public class Game {
     private int numberOfEnemies;
     private Screen screen;
 
-    public Game() throws InterruptedException, UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public Game() {
 
-        screen = new Screen();
         stage = new Stage();
+        stage.buildStage();
         grid = new Grid(13, 2);
         scary = new Scary(6, 1);
-        controls = new Controls(scary, grid);
-
-        String filepath = "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/music/Spice Girls Wannabe 8 Bit.wav";
-        Music musicObject = new Music();
-        musicObject.playMusic(filepath);
-
+        screen = new Screen();
+        controls = new Controls(scary, grid, screen);
     }
 
 
-    public void start() throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public void start() throws InterruptedException {
 
         while (controls.getMenuIsOn()) {
             screen.createIntroScreen();

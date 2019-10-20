@@ -16,8 +16,11 @@ public class Screen {
         intro.draw();
     }
 
+
     public void eraseMenu(){
         screen.delete();
+        screen = new Picture(10, 10, "/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/screens/BlankScreen.png");
+        screen.draw();
     }
 
 }
