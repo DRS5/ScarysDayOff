@@ -33,10 +33,10 @@ public class Enemy {
 
     public void move(Scary scary) {
 
-        if (wasHit){
-            enemyHit.delete();
-            wasHit = false;
-        }
+        //if (wasHit){
+           // enemyHit.delete();
+           // wasHit = false;
+       // }
 
         //left
         if (col > scary.getCol()) {
@@ -110,15 +110,15 @@ public class Enemy {
     }
 
     public void hit(int damage) {
-        if (wasHit){
-            enemyHit.delete();
-            this.health = health - damage;
-            return;
-        }
+        //if (wasHit){
+           // enemyHit.delete();
+           // this.health = health - damage;
+            //return;
+        //}
         this.health = health - damage;
-        enemyHit = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "/Users/codecadet/SpliceEmUp/resources/enemy/enemy hit riscos.png");
-        enemyHit.draw();
-        wasHit = true;
+        //enemyHit = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "/Users/codecadet/SpliceEmUp/resources/enemy/enemy hit riscos.png");
+        //enemyHit.draw();
+        //wasHit = true;
         System.out.println("Enemy health: " + health);
     }
 
@@ -126,10 +126,10 @@ public class Enemy {
     public void die(){
         isAlive = false;
         this.picture.delete();
-        if (wasHit){
-            enemyHit.delete();
-            wasHit = false;
-        }
+        //if (wasHit){
+            //enemyHit.delete();
+            //wasHit = false;
+        //}
     }
 
     public int getHealth() {
