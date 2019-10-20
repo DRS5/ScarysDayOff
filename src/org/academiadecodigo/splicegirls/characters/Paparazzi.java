@@ -9,6 +9,7 @@ public class Paparazzi extends Enemy{
 
     }
 
+
     /*public void enemyAnimation() throws InterruptedException {
         picture.delete();
         picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "enemy/enemy1 walk.png");

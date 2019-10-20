@@ -20,9 +20,11 @@ public class Controls implements KeyboardHandler {
     private Scary scary;
     private Grid grid;
     private Enemy enemy;
+    private Game game;
     private Music punch;
     private boolean menuIsOn = true;
     private Screen screen;
+    private boolean tutorialIsOn = false;
 
 
     public Controls(Scary scary, Grid grid, Screen screen) {
@@ -30,7 +32,7 @@ public class Controls implements KeyboardHandler {
         this.grid = grid;
         this.screen = screen;
 
-        String filepath = "resources/sounds/punch 8bit1.wav";
+        String filepath = "/Users/codecadet/SpliceEmUp/resources/sounds/punch 8bit1.wav";
         punch = new Music();
         punch.playMusic(filepath);
 
@@ -48,6 +50,10 @@ public class Controls implements KeyboardHandler {
 
     public boolean getMenuIsOn() {
         return menuIsOn;
+    }
+
+    public boolean getTutorialIsOn() {
+        return tutorialIsOn;
     }
 
     private void keyboardInit() {
@@ -119,6 +125,17 @@ public class Controls implements KeyboardHandler {
 
         keyboard.addEventListener(sPressed);
 
+        KeyboardEvent qPressed = new KeyboardEvent();
+        qPressed.setKey(KeyboardEvent.KEY_Q);
+        qPressed.setKeyboardEventType((KeyboardEventType.KEY_PRESSED));
+
+        keyboard.addEventListener(qPressed);
+
+        KeyboardEvent tPressed = new KeyboardEvent();
+        tPressed.setKey(KeyboardEvent.KEY_T);
+        tPressed.setKeyboardEventType((KeyboardEventType.KEY_PRESSED));
+
+        keyboard.addEventListener(tPressed);
     }
 
 
@@ -127,9 +144,23 @@ public class Controls implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
 
+            case KeyboardEvent.KEY_Q:
+                System.exit(0);
+                break;
+
             case KeyboardEvent.KEY_S:
+
                 this.menuIsOn = false;
                 screen.eraseMenu();
+                break;
+
+            case KeyboardEvent.KEY_T:
+                if (tutorialIsOn){
+                    screen.eraseMenu();
+                    return;
+                }
+                this.tutorialIsOn = true;
+                screen.createTutorialScreen();
                 break;
 
             case KeyboardEvent.KEY_RIGHT:
@@ -141,7 +172,7 @@ public class Controls implements KeyboardHandler {
                 }
                 scary.setDirection(Direction.RIGHT);
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/walk right scary.png"));
                 scary.getPicture().draw();
                 scary.getPicture().translate(+scary.getCellSize(), 0);// foto vai andar 50 pixeis para a direita
                 scary.moveRight();
@@ -156,7 +187,7 @@ public class Controls implements KeyboardHandler {
                 }
                 scary.setDirection(Direction.LEFT);
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/walk left scary.png"));
                 scary.getPicture().draw();
                 scary.getPicture().translate(-scary.getCellSize(), 0);// foto vai andar 50 pixeis para a esquerda
                 scary.moveLeft();
@@ -171,7 +202,7 @@ public class Controls implements KeyboardHandler {
                 }
                 if (scary.getDirection() == Direction.RIGHT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk right scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/walk right scary.png"));
                     scary.getPicture().draw();
                     scary.getPicture().translate(0, +scary.getCellSize());
                     scary.moveDown();
@@ -179,7 +210,7 @@ public class Controls implements KeyboardHandler {
                 }
                 if (scary.getDirection() == Direction.LEFT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk left scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/walk left scary.png"));
                     scary.getPicture().draw();
                     scary.getPicture().translate(0, +scary.getCellSize());
                     scary.moveDown();
@@ -194,7 +225,7 @@ public class Controls implements KeyboardHandler {
                 }
                 if (scary.getDirection() == Direction.RIGHT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk right scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/walk right scary.png"));
                     scary.getPicture().draw();
                     scary.getPicture().translate(0, -scary.getCellSize());
                     scary.moveUp();
@@ -202,7 +233,7 @@ public class Controls implements KeyboardHandler {
                 }
                 if (scary.getDirection() == Direction.LEFT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/walk left scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/walk left scary.png"));
                     scary.getPicture().draw();
                     scary.getPicture().translate(0, -scary.getCellSize());
                     scary.moveUp();
@@ -215,14 +246,14 @@ public class Controls implements KeyboardHandler {
                 }
                 if (scary.getDirection() == Direction.RIGHT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/punch right scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/punch right scary.png"));
                     scary.getPicture().draw();
                     scary.attack(enemy);
                     punch.playSound("/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/sounds/punch 8bit1.wav");
                     break;
                 }
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/punch left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/punch left scary.png"));
                 scary.getPicture().draw();
                 scary.attack(enemy);
                 punch.playSound("/Users/codecadet/Desktop/WorkSpace/SpliceEmUp/resources/sounds/punch 8bit1.wav");
@@ -243,11 +274,11 @@ public class Controls implements KeyboardHandler {
             } else {
                 if (scary.getDirection() == Direction.RIGHT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle right scary.png"));
                     scary.getPicture().draw();
                 } else {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle left scary.png"));
                     scary.getPicture().draw();
                 }
             }
@@ -258,7 +289,7 @@ public class Controls implements KeyboardHandler {
 
             } else {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle right scary.png"));
                 scary.getPicture().draw();
             }
         }
@@ -268,7 +299,7 @@ public class Controls implements KeyboardHandler {
 
             } else {
                 scary.getPicture().delete();
-                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
+                scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle left scary.png"));
                 scary.getPicture().draw();
             }
         }
@@ -279,12 +310,12 @@ public class Controls implements KeyboardHandler {
             } else {
                 if (scary.getDirection() == Direction.RIGHT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle right scary.png"));
                     scary.getPicture().draw();
                 }
                 if (scary.getDirection() == Direction.LEFT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle left scary.png"));
                     scary.getPicture().draw();
                 }
             }
@@ -296,12 +327,12 @@ public class Controls implements KeyboardHandler {
             } else {
                 if (scary.getDirection() == Direction.LEFT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle left scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle left scary.png"));
                     scary.getPicture().draw();
                 }
                 if (scary.getDirection() == Direction.RIGHT) {
                     scary.getPicture().delete();
-                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "scary/idle right scary.png"));
+                    scary.setPicture(new Picture(scary.getStartingPointCol() + (scary.getCol() * 80 + 10), scary.getStartingPointRow() + (scary.getRow() * 80 + 10), "/Users/codecadet/SpliceEmUp/resources/scary/idle right scary.png"));
                     scary.getPicture().draw();
                 }
             }

@@ -13,7 +13,7 @@ public class Stage {
     }
 
     public void buildStage(){
-        stage = new Picture(10, 10, "levelBackground/fundobarcos.jpg");
+        stage = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/levelBackground/fundobarcos.jpg");
         stage.draw();
     }
 

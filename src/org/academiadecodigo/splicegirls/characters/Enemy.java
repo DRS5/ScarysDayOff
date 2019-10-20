@@ -17,6 +17,10 @@ public class Enemy {
     private int row;
     private int damage = 5;
     private Grid grid;
+    private Picture enemyHit;
+    private boolean wasHit = false;
+    private boolean killedScary = false;
+    private int points;
 
     public Enemy(int col, int row, String picturePath) {
 
@@ -29,10 +33,18 @@ public class Enemy {
 
     public void move(Scary scary) {
 
+        if (wasHit){
+            enemyHit.delete();
+            wasHit = false;
+        }
+
         //left
 
         if (col > scary.getCol()) {
             if (col == 0){
+                return;
+            }
+            if(col == scary.getCol() - 1){
                 return;
             }
             col--;
@@ -44,6 +56,9 @@ public class Enemy {
 
         if (col < scary.getCol()) {
             if (col == grid.getCols()){
+                return;
+            }
+            if(col == scary.getCol() + 1){
                 return;
             }
             col++;
@@ -58,6 +73,7 @@ public class Enemy {
             if (row == 0){
                 return;
             }
+
             row--;
             picture.translate(0, -cellSize);
 
@@ -87,25 +103,51 @@ public class Enemy {
                 System.out.println("scary outch2");
             }
         } else {
+            killedScary = true;
             scary.killScary();
+            die();
         }
     }
 
     public void hit(int damage) {
+        if (wasHit){
+            enemyHit.delete();
+            this.health = health - damage;
+            return;
+        }
         this.health = health - damage;
+        enemyHit = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "/Users/codecadet/SpliceEmUp/resources/enemy/enemy hit3.png");
+        enemyHit.draw();
+        wasHit = true;
         System.out.println("Enemy health: " + health);
+    }
+
+    public boolean checkifKilledScary(){
+        return killedScary;
+    }
+
+    public void killAllEnemies(){
+        while(isAlive){
+            die();
+        }
+    }
+
+    public void die(){
+        isAlive = false;
+        this.picture.delete();
     }
 
     public int getHealth() {
         return health;
     }
 
-    public boolean getIsAlive() {
+    public boolean isAlive() {
         return isAlive;
     }
 
     public void killEnemy() {
         isAlive = false;
+        points = points + 100;
         this.picture.delete();
     }
 
@@ -120,5 +162,18 @@ public class Enemy {
     public int getRow(){
         return row;
     }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getPoints(){
+        return points;
+    }
+
 }
 

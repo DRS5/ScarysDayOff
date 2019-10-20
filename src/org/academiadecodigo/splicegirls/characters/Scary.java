@@ -9,6 +9,8 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.splicegirls.position.Position;
 
+import javax.swing.*;
+
 public class Scary {
 
         private Picture picture;
@@ -25,15 +27,16 @@ public class Scary {
         private int damage = 25;
         private Rectangle healthbar;
 
+
     public Scary(int col, int row) {
 
         this.col = col;
         this.row = row;
 
-        picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "scary/idle right scary.png");
+        picture = new Picture(startingPointCol + (col * cellSize + PADDING),startingPointRow + (row * cellSize + PADDING), "/Users/codecadet/SpliceEmUp/resources/scary/idle right scary.png");
         picture.draw();
 
-        Picture picture = new Picture(40, 44, "resources/healthbar/healthbarexample.png");
+        Picture picture = new Picture(53, 52, "/Users/codecadet/SpliceEmUp/resources/healthbar/healthbarfinal.png");
         picture.draw();
         healthBar();
 
@@ -59,7 +62,7 @@ public class Scary {
 
     }
 
-    public void attack(Enemy enemy){
+    public void attack(Enemy enemy) {
 
         if(enemy.getHealth() > 0) {
             if (enemy.getCol() == col +1 && enemy.getRow() == row){
@@ -82,7 +85,8 @@ public class Scary {
     }
 
     public void killScary(){
-        isAlive = false;
+        this.isAlive = false;
+        System.out.println("OH NO I DIEEEEEEEEDDDDDD NOOOOOOOOOOOOO");
         this.picture.delete();
     }
 
@@ -147,6 +151,10 @@ public class Scary {
 
     public int getHealth(){
         return health;
+    }
+
+    public boolean isAlive(){
+        return this.isAlive;
     }
 }
 
