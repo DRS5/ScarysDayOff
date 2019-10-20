@@ -39,12 +39,11 @@ public class Enemy {
         }
 
         //left
-
         if (col > scary.getCol()) {
             if (col == 0){
                 return;
             }
-            if(col == scary.getCol() - 1){
+            if(col - 1 == scary.getCol()){
                 return;
             }
             col--;
@@ -53,12 +52,11 @@ public class Enemy {
         }
 
         //right
-
         if (col < scary.getCol()) {
             if (col == grid.getCols()){
                 return;
             }
-            if(col == scary.getCol() + 1){
+            if(col + 1 == scary.getCol()){
                 return;
             }
             col++;
@@ -67,8 +65,6 @@ public class Enemy {
         }
 
         //up
-
-
         if (row > scary.getRow()) {
             if (row == 0){
                 return;
@@ -80,12 +76,11 @@ public class Enemy {
         }
 
         //down
-
-
         if (row < scary.getRow()) {
             if(row == grid.getRows()){
                 return;
             }
+
             row++;
             picture.translate(0, cellSize);
         }
@@ -94,11 +89,11 @@ public class Enemy {
     public void attack(Scary scary) throws InterruptedException {
 
         if(scary.getHealth() > 0) {
-            if (scary.getCol() +1 == col && scary.getRow() == row){
+            if (scary.getCol() + 1 == col && scary.getRow() == row){
                 scary.hit(damage);
                 System.out.println("scary outch");
             }
-            if (scary.getCol() -1 == col && scary.getRow() == row){
+            if (scary.getCol() - 1 == col && scary.getRow() == row){
                 scary.hit(damage);
                 System.out.println("scary outch2");
             }
@@ -148,6 +143,7 @@ public class Enemy {
     public void killEnemy() {
         isAlive = false;
         points = points + 100;
+        System.out.println(points);
         this.picture.delete();
     }
 

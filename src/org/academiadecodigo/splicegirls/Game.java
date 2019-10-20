@@ -24,7 +24,6 @@ public class Game {
     private int numberOfEnemies;
     private Screen screen;
     private Enemy enemy;
-    private Text score;
     private Boolean gameIsOver = false;
     private Picture picture;
 
@@ -35,6 +34,7 @@ public class Game {
         grid = new Grid(13, 2);
         scary = new Scary(6, 1);
         controls = new Controls(scary, grid, screen);
+
     }
 
 
@@ -46,7 +46,16 @@ public class Game {
             System.out.println("HELLO");
         }
 
+
         //WAVE 1
+
+        picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave1.png");
+        picture.grow(-160, -100);
+        picture.draw();
+        Thread.sleep(2500);
+        picture.delete();
+
+
         while (scary.isAlive() && waveCounter == 1) {
             spawnEnemies(3);
             waveCounter++;
@@ -60,9 +69,9 @@ public class Game {
         picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave2.png");
         picture.grow(-160, -100);
         picture.draw();
-        Thread.sleep(3500);
+        Thread.sleep(2500);
         picture.delete();
-        Thread.sleep(500);
+
 
         //WAVE 2
 
@@ -74,7 +83,6 @@ public class Game {
         if (!scary.isAlive()) {
             screen.createGameOverScreen();
             setGameIsOver(true);
-
         }
 
         //WAVE 3
@@ -82,9 +90,8 @@ public class Game {
         picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave3.png");
         picture.grow(-160, -100);
         picture.draw();
-        Thread.sleep(3500);
+        Thread.sleep(2500);
         picture.delete();
-        Thread.sleep(500);
 
         while (scary.isAlive() && waveCounter == 3) {
             spawnEnemies(5);
@@ -99,7 +106,13 @@ public class Game {
 
         //WAVE 4
 
-        while (scary.isAlive() && waveCounter == 1) {
+        picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave3.png");
+        picture.grow(-160, -100);
+        picture.draw();
+        Thread.sleep(2500);
+        picture.delete();
+
+        while (scary.isAlive() && waveCounter == 4) {
             spawnBoss();
             waveCounter++;
             Thread.sleep(200);
@@ -161,12 +174,6 @@ public class Game {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void scoreBoard() {
-        score = new Text(20000, 50, "HIGHSCORE: " + enemy.getPoints());
-        score.setColor(Color.BLACK);
-        score.draw();
     }
 
     public void setGameIsOver(boolean ganeIsOver) {
