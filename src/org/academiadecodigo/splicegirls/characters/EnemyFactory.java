@@ -8,10 +8,10 @@ public class EnemyFactory {
         int randomNumber = Random.getRandom(2);
 
         if (randomNumber == 0) {
-            return new Paparazzi(randomCol(), 2, "/Users/codecadet/SpliceEmUp/resources/enemy/enemy2 idle.png");
+            return new Paparazzi(randomCol(), 2, "resources/enemy/enemy2 idle.png");
         }
         if (randomNumber == 1) {
-            return new Fan(randomCol(), 2, "/Users/codecadet/SpliceEmUp/resources/enemy/enemy1 idle.png");
+            return new Fan(randomCol(), 2, "resources/enemy/enemy1 idle.png");
         }
         return null;
     }
@@ -29,7 +29,7 @@ public class EnemyFactory {
     }
 
     public static Enemy createBoss(){
-        return new Boss(13, 2, "/Users/codecadet/SpliceEmUp/resources/Boss/mini boss small sem fumo.png");
+        return new Boss(13, 2, "resources/Boss/mini boss small sem fumo.png");
     }
 }
 

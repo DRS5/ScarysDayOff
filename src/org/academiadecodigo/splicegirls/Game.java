@@ -52,7 +52,7 @@ public class Game {
         //WAVE 1
 
 
-        picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave1.png");
+        picture = new Picture(10, 10, "resources/waves/wave1.png");
         picture.grow(-160, -100);
         picture.draw();
         Thread.sleep(2500);
@@ -73,7 +73,7 @@ public class Game {
         //WAVE 2
 
         if (gameIsOver == false) {
-            picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave2.png");
+            picture = new Picture(10, 10, "resources/waves/wave2.png");
             picture.grow(-160, -100);
             picture.draw();
             Thread.sleep(2500);
@@ -94,7 +94,7 @@ public class Game {
 
         //WAVE 3
         if (gameIsOver == false) {
-            picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave3.png");
+            picture = new Picture(10, 10, "resources/waves/wave3.png");
             picture.grow(-160, -100);
             picture.draw();
             Thread.sleep(2500);
@@ -115,7 +115,7 @@ public class Game {
 
         //WAVE 4
         if (gameIsOver == false) {
-            picture = new Picture(10, 10, "/Users/codecadet/SpliceEmUp/resources/waves/wave4.png");
+            picture = new Picture(10, 10, "resources/waves/wave4.png");
             picture.grow(-160, -100);
             picture.draw();
             Thread.sleep(3000);

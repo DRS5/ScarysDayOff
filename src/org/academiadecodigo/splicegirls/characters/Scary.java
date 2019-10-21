@@ -37,15 +37,15 @@ public class Scary {
         this.col = col;
         this.row = row;
 
-        picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "/Users/codecadet/SpliceEmUp/resources/scary/idle right scary.png");
+        picture = new Picture(startingPointCol + (col * cellSize + PADDING), startingPointRow + (row * cellSize + PADDING), "resources/scary/idle right scary.png");
         picture.draw();
 
-        Picture picture = new Picture(53, 52, "/Users/codecadet/SpliceEmUp/resources/healthbar/healthbarfinal.png");
+        Picture picture = new Picture(53, 52, "resources/healthbar/healthbarfinal.png");
         picture.draw();
         healthBar();
 
 
-        highscore = new Picture(850,55, "/Users/codecadet/SpliceEmUp/resources/highscore/highscore final.png");
+        highscore = new Picture(850,55, "resources/highscore/highscore final.png");
         highscore.draw();
 
         score = new Text(1200, 68, String.valueOf(0));
